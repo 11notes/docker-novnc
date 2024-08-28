@@ -1,0 +1,11 @@
+image: 11notes/novnc:stable
+manifests:
+  - image: 11notes/novnc:amd64-stable
+    platform:
+      architecture: amd64
+      os: linux
+  - image: 11notes/novnc:arm64v8-stable
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v8

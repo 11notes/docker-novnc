@@ -1,0 +1,25 @@
+services:
+  desktop:
+    image: 11notes/xfce:stable
+    environment:
+      - DISPLAY=novnc:0.0
+    depends_on:
+      novnc:
+        condition: service_healthy
+        restart: true
+    networks:
+      - backend
+  novnc:  
+    image: 11notes/novnc:stable"
+    environment:
+      - DISPLAY_WIDTH=1024
+      - DISPLAY_HEIGHT=768
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+      - frontend
+networks:
+  backend:
+    internal: true
+  frontend:
