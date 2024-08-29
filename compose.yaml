@@ -1,25 +1,30 @@
 services:
-  desktop:
-    image: 11notes/xfce:stable
+  firefox:
+    image: "11notes/firefox:stable"
+    container_name: "firefox"
     environment:
-      - DISPLAY=novnc:0.0
+      TZ: "Europe/Zurich"
+      DISPLAY: "novnc:0.0"
     depends_on:
       novnc:
         condition: service_healthy
         restart: true
     networks:
-      - backend
+      - "backend"
+      - "internet"
   novnc:  
-    image: 11notes/novnc:stable"
+    image: "11notes/novnc:stable"
     environment:
-      - DISPLAY_WIDTH=1024
-      - DISPLAY_HEIGHT=768
+      TZ: "Europe/Zurich"
+      DISPLAY_WIDTH: 1024
+      DISPLAY_HEIGHT: 768
     ports:
-      - "8080:8080"
+      - "8080:8080/tcp"
     networks:
-      - backend
-      - frontend
+      - "backend"
+      - "frontend"
 networks:
   backend:
     internal: true
   frontend:
+  internet:
